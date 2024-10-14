@@ -1,0 +1,29 @@
+setwd("~/Downloads/Clustering-and-Classification-with-Machine-Learning-in-R/Section5")
+
+###### Partitioning around meloids (PAM)
+###### More robust to outliers
+
+data("USArrests")
+
+head(USArrests)
+
+df=scale(USArrests)
+
+head(df)
+
+library(cluster)
+library(factoextra)
+
+### number of optimum clusters
+
+fviz_nbclust(df,pam,method="silhouette")
+## other methods include wss
+
+fviz_nbclust(df,pam,method="wss")
+
+pam.res=pam(df,3) #(scaled data frame, number of clusters)
+
+print(pam.res)
+
+
+fviz_cluster(pam.res,palette=c("red","blue","green"))

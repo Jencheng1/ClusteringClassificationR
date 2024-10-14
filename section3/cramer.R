@@ -1,0 +1,30 @@
+
+
+mat=read.csv("section3/student-mat.csv")
+#G3 is the final maths score
+
+#schoolsup: school support
+#sex: gender
+head(mat)
+str(mat)
+
+tbl = table(mat$sex, mat$schoolsup) 
+
+#H0: School support provided to maths students is independent of sex
+chisq.test(tbl) 
+
+#H0 rejected
+
+### Cramer's coefficent
+##statistics phi and Cramer's V are used to gauge the strength of 
+##the association between two nominal variables
+#Cramer's V varies from 0 to 1, with a 1 indicting a perfect association.  
+#phi varies from -1 to 1, with  -1 and 1  
+require(vcd)
+assocstats(tbl)
+
+#2 x 4 table
+tbl2 = table(mat$famsup, mat$Mjob) 
+tbl2
+assocstats(tbl2)
+

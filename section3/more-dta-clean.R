@@ -1,0 +1,38 @@
+
+
+eco=read.csv("section3/countries_ecologicalF.csv")
+
+head(eco)
+
+str(eco)
+ncol(eco)
+# the $ and , make the data vectors, need to be replaced
+# replace $ and , with blank "" in the n.  and coerce that result to numeric
+
+eco$GDP = as.numeric(gsub("[\\$,]", "", eco$GDP.per.Capita))
+
+names(eco)
+
+mdf= names(eco) %in% c("Population..millions.", "GDP", 
+                       "Grazing.Footprint","HDI","Carbon.Footprint",
+                       "Cropland","Forest.Land","Urban.Land","Total.Biocapacity") 
+
+newdata= eco[mdf] #include the above columns
+
+x= eco[!mdf] #exclude the above columns
+
+head(newdata)
+
+newdata=na.omit(newdata)
+
+head(newdata)
+
+# Rename column by name: change " Population..millions." to "Population"
+
+names(newdata)[names(newdata)=="Population..millions."] ="Population"
+
+names(newdata)[names(newdata)=="Total.Biocapacity"] ="BiocapacityT"
+
+head(newdata)
+
+write.csv(newdata,"biocap.csv") #store dataframe in a csv
